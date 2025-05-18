@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\johnk\OneDrive\Documents\NetBeansProjects\COMP603_Group_Project_2
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon May 19 08:41:58 NZST 2025: Shutting down Derby engine
+----------------------------------------------------------------
+Mon May 19 08:41:58 NZST 2025:
+Shutting down instance a816c00e-0196-e512-82ae-ffffb46e3dc2 on database directory C:\Users\johnk\OneDrive\Documents\NetBeansProjects\COMP603_Group_Project_2\Pet_DataBase with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
+----------------------------------------------------------------
