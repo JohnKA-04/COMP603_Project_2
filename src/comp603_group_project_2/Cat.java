@@ -8,6 +8,8 @@ package comp603_group_project_2;
  *
  * @author johnk
  */
-public class Cat {
-    
+public class Cat extends VirtualPet {
+    public Cat(String name){
+        super(name);
+    }
 }
