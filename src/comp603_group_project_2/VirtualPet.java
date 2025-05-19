@@ -8,7 +8,7 @@ package comp603_group_project_2;
  *
  * @author johnk
  */
-public class COMP603_Group_Project_2 {
+public class VirtualPet {
 
     /**
      * @param args the command line arguments
