@@ -83,8 +83,9 @@ abstract class VirtualPet {
          return name + "'s Stats:\n"
                 + "Hunger: " + hunger + "/100\n"
                 + "Happiness: " + happiness + "/100\n"
-                + "Energy: " + energy + "/100\n"
-                + "Health: " + health + "/100";
+                + "Energy: "+ energy + "/100\n"
+                + "Health: "+ health + "/100"
+                + "Clean: "+cleanliness+"/100\n";
     }
          
 }
