@@ -86,6 +86,7 @@ abstract class VirtualPet {
                 + "Energy: "+ energy + "/100\n"
                 + "Health: "+ health + "/100"
                 + "Clean: "+cleanliness+"/100\n";
-    }
          
+    }
+        
 }
