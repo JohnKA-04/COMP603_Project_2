@@ -40,9 +40,9 @@ abstract class VirtualPet {
     public int getHealth(){
         return health;
     }
-    
+    //Chatgpt ASSISTED codes below
     protected void decreaseHunger(int value){
-        this.hunger = Math.max(0, Math.min(100, this.hunger + value));//These decrease method were created with SOME assistance from Ai.
+        this.hunger = Math.max(0, Math.min(100, this.hunger + value));
         if (this.hunger <= 20) {
             decreaseHealth(10);
         }
@@ -62,12 +62,29 @@ abstract class VirtualPet {
        protected void decreaseClean(int value){
        this.cleanliness = Math.max(0, Math.min(100, this.hunger + value));
         if (this.cleanliness <= 20) {
-            System.out.println("PLEASE CLEAN ME!!!");
+            System.out.println("PLease clean meee!!!");
         }  
     }
         protected void decreaseHealth(int value){
         this.health = Math.max(0, Math.min(100, this.health - value));
          
     }
-    
+         protected void increaseHealth(int value){
+        this.health = Math.min(100, this.health + value);
+         //End of chatgpt assistance. 
+    }
+         public abstract void play();
+         public abstract void sleep();
+         public abstract void eat();
+         public abstract void clean();
+         public abstract void makeNoise();
+         
+         public String toString() {
+         return name + "'s Stats:\n"
+                + "Hunger: " + hunger + "/100\n"
+                + "Happiness: " + happiness + "/100\n"
+                + "Energy: " + energy + "/100\n"
+                + "Health: " + health + "/100";
+    }
+         
 }
