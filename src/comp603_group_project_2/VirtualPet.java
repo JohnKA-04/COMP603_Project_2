@@ -41,31 +41,31 @@ abstract class VirtualPet {
         return health;
     }
     //Chatgpt ASSISTED codes below
-    protected void decreaseHunger(int value){
+    protected void updateHunger(int value){
         this.hunger = Math.max(0, Math.min(100, this.hunger + value));
         if (this.hunger <= 20) {
-            decreaseHealth(10);
+            updateHealth(10);
         }
     }
-     protected void decreaseEnergy(int value){
+     protected void updateEnergy(int value){
          this.energy = Math.max(0, Math.min(100, this.hunger + value));
         if (energy <= 20) {
-            decreaseHealth(10);
+            updateHealth(10);
         }
     }
-      protected void decreaseHappiness(int value){
+      protected void updateHappiness(int value){
          this.happiness = Math.max(0, Math.min(100, this.hunger + value));
         if (this.happiness <= 20) {
-            decreaseHealth(10);
+            updateHealth(10);
         }
     }
-       protected void decreaseClean(int value){
+       protected void updateClean(int value){
        this.cleanliness = Math.max(0, Math.min(100, this.hunger + value));
         if (this.cleanliness <= 20) {
             System.out.println("PLease clean meee!!!");
         }  
     }
-        protected void decreaseHealth(int value){
+        protected void updateHealth(int value){
         this.health = Math.max(0, Math.min(100, this.health - value));
          
     }
