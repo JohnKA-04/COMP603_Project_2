@@ -15,30 +15,30 @@ public class Dog extends VirtualPet{
      @Override
     public void play() {
         System.out.println(getName() + " chases a ball!");
-        decreaseHappiness(20);
-        decreaseEnergy(-10);
-        decreaseHunger(-5);
-        decreaseClean(-5);
+        updateHappiness(20);
+        updateEnergy(-10);
+        updateHunger(-5);
+        updateClean(-5);
     }
 
     @Override
     public void eat() {
         System.out.println(getName() + " devours a tasty bone.");
-        decreaseHunger(30);
-        decreaseEnergy(5);
+        updateHunger(30);
+        updateEnergy(5);
     }
 
     @Override
     public void sleep() {
         System.out.println(getName() + " is napping.");
-        decreaseEnergy(40);
-        decreaseHunger(-5);
+        updateEnergy(40);
+        updateHunger(-5);
     }
         @Override
     public void clean() {
         System.out.println(getName() + " Scrubb dubb dubb.");
-        decreaseClean(30);
-        decreaseHunger(-5);
+        updateClean(30);
+        updateHunger(-5);
     }
 
     @Override
