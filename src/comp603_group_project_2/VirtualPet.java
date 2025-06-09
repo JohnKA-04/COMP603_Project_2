@@ -12,7 +12,7 @@ abstract class VirtualPet {
     private String petName;
     protected int hunger, happiness, energy, health;
 
-    public VirtualPet(String petName) {
+    public VirtualPet(String petName) {//the presets of the pet stats
         this.petName = petName;
         this.hunger = 60;
         this.happiness = 70;
@@ -99,7 +99,6 @@ abstract class VirtualPet {
 
     @Override
     public String toString() {
-        return String.format("%s's Stats:\nHunger: %d/100\nHappiness: %d/100\nEnergy: %d/100\nHealth: %d/100",
-                petName, hunger, happiness, energy, health);
+        return String.format("%s's Stats:\nHunger🍚: %d/100\nHappiness ✨: %d/100\nEnergy ⚡: %d/100\nHealth ❤️: %d/100",petName, hunger, happiness, energy, health);
     }
 }
