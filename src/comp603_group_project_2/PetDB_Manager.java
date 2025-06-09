@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author johnk
  */
 public class PetDB_Manager {
-    private static final String JDBC_URL = "jdbc:derby:Pet_DataBase;create=true";
+    private static final String JDBC_URL = "jdbc:derby://localhost:1527/Pet_DataBase";
     private static final String USER = "Group_2";
     private static final String PASSWORD = "JohnJacee";
     private static Connection conn = null;
