@@ -60,7 +60,7 @@ abstract class VirtualPet {
     }
     return value; 
 }
-    protected void adjustStat(String statName, int amount) {
+    protected void updateStat(String statName, int amount) {
         switch (statName) {
             case "hunger":
                 hunger = statcap(hunger + amount);
@@ -84,10 +84,10 @@ abstract class VirtualPet {
     }
 
     protected void decreaseHealth(int amount) {
-        adjustStat("health", -amount);
+        updateStat("health", -amount);
     }
     protected void increaseHealth(int amount) {
-        adjustStat("health", amount);
+        updateStat("health", amount);
     }
 
     public abstract void play();
