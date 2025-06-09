@@ -8,6 +8,6 @@ package comp603_group_project_2;
  *
  * @author johnk
  */
-public class PetCare {
+public class Main {
     
 }

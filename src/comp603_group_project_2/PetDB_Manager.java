@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author johnk
  */
 public class PetDB_Manager {
-    private static final String JDBC_URL = "jdbc:derby:Pet;create=true";
+    private static final String JDBC_URL = "jdbc:derby:Pet_DataBase;create=true";
     private static final String USER = "John";
     private static final String PASSWORD = "Jacee";
     private static Connection conn = null;
@@ -29,18 +29,54 @@ public class PetDB_Manager {
                 System.out.println("Connected to DB at " + JDBC_URL);
                 createPetTable();
             } catch (SQLException e) {
-                if ("XJ040".equals(e.getSQLState()) || "XSDB6".equals(e.getSQLState())) {
-                    System.err.println("Database already booted or in use. Ensure no other instances are running.");
-                    JOptionPane.showMessageDialog(null, "Database is in use or failed to start. Please close conflicting apps.", "Database Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    System.err.println("Database connection error: " + e.getMessage());
-                    JOptionPane.showMessageDialog(null, "DB connection error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
-                }
-                conn = null;
+                System.out.println("Error");
             }
         }
         return conn;
     }
 
-    
+    public static void closeConnection() {
+        if (conn != null) {
+            try {
+                if (JDBC_URL.contains("embedded")) {
+                    DriverManager.getConnection("jdbc:derby:;shutdown=true");
+                    System.out.println("Derby DB shut down normally.");
+                }
+            } catch (SQLException se) {
+                System.out.println("Error");
+            } finally {
+                try {
+                    if (conn != null) {
+                        conn.close();
+                        conn = null;
+                        System.out.println("DB connection closed.");
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Failed to completely close Database");
+                }
+            }
+        }
+    }
+
+    private static void createPetTable() {
+        try (Statement stmt = conn.createStatement()) {
+            DatabaseMetaData dbmd = conn.getMetaData();
+            ResultSet tables = dbmd.getTables(null, null, "PETS", new String[]{"TABLE"});
+            if (!tables.next()) {
+                String sql = "CREATE TABLE PETS (" +
+                        "NAME VARCHAR(255) PRIMARY KEY, " +
+                        "TYPE VARCHAR(255), " +
+                        "HUNGER INT, " +
+                        "HAPPINESS INT, " +
+                        "ENERGY INT, " +
+                        "HEALTH INT)";
+                stmt.executeUpdate(sql);
+                System.out.println("Created PETS table.");
+            } else {
+                System.out.println("PETS table exists.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error creating table: " + e.getMessage());
+        }
+    }
 }
