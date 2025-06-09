@@ -12,7 +12,7 @@ abstract class VirtualPet {
     private String petName;
     protected int hunger, happiness, energy, health;
 
-    public VirtualPet(String petName) {//the presets of the pet stats
+    public VirtualPet(String petName) {//the initial stat values
         this.petName = petName;
         this.hunger = 50;
         this.happiness = 70;
@@ -60,7 +60,6 @@ abstract class VirtualPet {
     }
     return value; 
 }
-
     protected void adjustStat(String statName, int amount) {
         switch (statName) {
             case "hunger":
