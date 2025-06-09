@@ -8,47 +8,43 @@ package comp603_group_project_2;
  *
  * @author johnk
  */
-public class Cat extends VirtualPet {
-    public Cat(String name){
-        super(name);
-    }
-    
+class Cat extends VirtualPet {
+    public Cat(String petName) { super(petName); }
+
     @Override
     public void play() {
-        System.out.println(getName() + " pounces on a laser pointer.");
-        updateHappiness(25);
-        updateEnergy(-15);
-        updateHunger(-5);
+        System.out.println(getName() + " bats at a dangling toy.");
+        adjustStat("happiness", 30);
+        adjustStat("energy", -20);
+        adjustStat("hunger", -8);
         increaseHealth(5);
     }
-    
+
     @Override
     public void eat() {
-        System.out.println(getName() + " enjoys some fish.");
-        updateHunger(25);
-        updateEnergy(5);
+        System.out.println(getName() + " delicately eats its fishy treat.");
+        adjustStat("hunger", 30);
+        adjustStat("energy", 3);
         increaseHealth(10);
     }
-    
+
     @Override
     public void sleep() {
-        System.out.println(getName() + " curls up for a snooze. zzzz");
-        updateEnergy(30);
-        updateHunger(-5);
+        System.out.println(getName() + " naps in a sunbeam.");
+        adjustStat("energy", 35);
+        adjustStat("hunger", -5);
         increaseHealth(5);
     }
-    
-    @Override 
+
+    @Override
     public void makeNoise() {
-        System.out.println("Meow Meowww!");
+        System.out.println("Meow! A soft purr.");
     }
-    
+
     @Override
     public void clean() {
-        System.out.println(getName() + " is grooming itself.");
-        updateHappiness(10);
-        updateEnergy(-3);
-        increaseHealth(3);
+        System.out.println(getName() + " meticulously grooms itself.");
+        adjustStat("happiness", 5);
+        increaseHealth(2);
     }
-   
 }

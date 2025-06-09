@@ -9,85 +9,97 @@ package comp603_group_project_2;
  * @author johnk
  */
 abstract class VirtualPet {
-    
-    private String name;
-    private int hunger, energy, happiness, cleanliness,health;
-    
-    public VirtualPet(String name){
-        this.name = name;
-        this.hunger = 50;
-        this.energy = 50;
-        this.happiness = 50;
-        this.cleanliness = 50;
+    private String petName;
+    protected int hunger, happiness, energy, health;
+
+    public VirtualPet(String petName) {
+        this.petName = petName;
+        this.hunger = 60;
+        this.happiness = 70;
+        this.energy = 80;
         this.health = 100;
     }
-    
-    public String getName(){
-    return name;
+    public String getName() { 
+        return petName; }
+    public int getHunger() { 
+        return hunger; }
+    public int getHappiness() { 
+        return happiness; }
+    public int getEnergy() { 
+        return energy; }
+    public int getHealth() { 
+        return health; }
+
+    public void setHunger(int hunger) { 
+        this.hunger = statcap(hunger); 
+    }
+    public void setHappiness(int happiness) { 
+        this.happiness = statcap(happiness); 
+    }
+    public void setEnergy(int energy) { 
+        this.energy = statcap(energy); 
+    }
+    public void setHealth(int health) { 
+        this.health = statcap(health, 0, 100); 
+    }
+    private int statcap(int value) {//just to make sure that 0 is lowest value and max is 100
+    if (value < 0) {
+        return 0; 
+    }
+    if (value > 100) {
+        return 100; 
+    }
+    return value; 
 }
-    public int getHunger(){
-        return hunger;
+    private int statcap(int value, int min, int max) {//make sure health stays within the range when hunger or happenis affects it
+    if (value < min) {
+        return min; 
     }
-    public int getEnergy(){
-        return energy;
+    if (value > max) {
+        return max; 
     }
-    public int getHappiness(){
-        return happiness;
-    }
-    public int getClean(){
-        return cleanliness;
-    }
-    public int getHealth(){
-        return health;
-    }
-    //Chatgpt ASSISTED codes below
-    protected void updateHunger(int value){
-        this.hunger = Math.max(0, Math.min(100, this.hunger + value));
-        if (this.hunger <= 20) {
-            updateHealth(10);
-        }
-    }
-     protected void updateEnergy(int value){
-         this.energy = Math.max(0, Math.min(100, this.hunger + value));
-        if (energy <= 20) {
-            updateHealth(10);
-        }
-    }
-      protected void updateHappiness(int value){
-         this.happiness = Math.max(0, Math.min(100, this.hunger + value));
-        if (this.happiness <= 20) {
-            updateHealth(10);
-        }
-    }
-       protected void updateClean(int value){
-       this.cleanliness = Math.max(0, Math.min(100, this.hunger + value));
-        if (this.cleanliness <= 20) {
-            System.out.println("PLease clean meee!!!");
-        }  
-    }
-        protected void updateHealth(int value){
-        this.health = Math.max(0, Math.min(100, this.health - value));
-         
-    }
-         protected void increaseHealth(int value){
-        this.health = Math.min(100, this.health + value);
-         //End of chatgpt assistance. 
-    }
-         public abstract void play();
-         public abstract void sleep();
-         public abstract void eat();
-         public abstract void clean();
-         public abstract void makeNoise();
-         
-         public String toString() {
-         return name + "'s Stats:\n"
-                + "Hunger: " + hunger + "/100\n"
-                + "Happiness: " + happiness + "/100\n"
-                + "Energy: "+ energy + "/100\n"
-                + "Health: "+ health + "/100"
-                + "Clean: "+cleanliness+"/100\n";
-         
-    }
-        
+    return value; 
 }
 
+    protected void adjustStat(String statName, int amount) {
+        switch (statName) {
+            case "hunger":
+                hunger = statcap(hunger + amount);
+                if (hunger <= 20 && hunger > 0) System.out.println(getName() + " needs some fooooood!");
+                else if (hunger == 0) decreaseHealth(10);
+                break;
+            case "happiness":
+                happiness = statcap(happiness + amount);
+                if (happiness <= 20 && happiness > 0) System.out.println(getName() + " has depression");
+                else if (happiness == 0) decreaseHealth(5);
+                break;
+            case "energy":
+                energy = statcap(energy + amount);
+                if (energy <= 20 && energy > 0) System.out.println(getName() + "'s eyes are closing.");
+                else if (energy == 0) decreaseHealth(8);
+                break;
+            case "health":
+                health = statcap(health + amount, 0, 100);
+                break;
+        }
+    }
+
+    protected void decreaseHealth(int amount) {
+        adjustStat("health", -amount);
+    }
+    protected void increaseHealth(int amount) {
+        adjustStat("health", amount);
+    }
+
+    public abstract void play();
+    public abstract void eat();
+    public abstract void sleep();
+    public abstract void makeNoise();
+    public abstract void clean();
+
+    @Override
+    public String toString() {
+        return String.format("%s's Stats:\nHunger: %d/100\nHappiness: %d/100\nEnergy: %d/100\nHealth: %d/100",
+                petName, hunger, happiness, energy, health);
+    }
+}
