@@ -14,25 +14,25 @@ class Cat extends VirtualPet {
     @Override
     public void play() {
         System.out.println(getName() + " bats at a dangling toy.");
-        adjustStat("happiness", 30);
-        adjustStat("energy", -20);
-        adjustStat("hunger", -8);
+        updateStat("happiness", 30);
+        updateStat("energy", -20);
+        updateStat("hunger", -8);
         increaseHealth(5);
     }
 
     @Override
     public void eat() {
         System.out.println(getName() + " delicately eats its fishy treat.");
-        adjustStat("hunger", 30);
-        adjustStat("energy", 3);
+        updateStat("hunger", 30);
+        updateStat("energy", 3);
         increaseHealth(10);
     }
 
     @Override
     public void sleep() {
         System.out.println(getName() + " naps in a sunbeam.");
-        adjustStat("energy", 35);
-        adjustStat("hunger", -5);
+        updateStat("energy", 35);
+        updateStat("hunger", -5);
         increaseHealth(5);
     }
 
@@ -44,7 +44,7 @@ class Cat extends VirtualPet {
     @Override
     public void clean() {
         System.out.println(getName() + " meticulously grooms itself.");
-        adjustStat("happiness", 5);
+        updateStat("happiness", 5);
         increaseHealth(2);
     }
 }
