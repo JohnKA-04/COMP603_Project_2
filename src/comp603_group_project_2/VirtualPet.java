@@ -14,7 +14,7 @@ abstract class VirtualPet {
 
     public VirtualPet(String petName) {//the presets of the pet stats
         this.petName = petName;
-        this.hunger = 60;
+        this.hunger = 50;
         this.happiness = 70;
         this.energy = 80;
         this.health = 100;
