@@ -8,7 +8,7 @@ package comp603_group_project_2;
  *
  * @author johnk
  */
-class Dog extends VirtualPet {
+public class Dog extends VirtualPet {
     public Dog(String petName) { super(petName); }
 
     @Override
