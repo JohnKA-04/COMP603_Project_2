@@ -164,7 +164,6 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
                 startNewGameMode();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No saved pets found. Let's create one!", "New Game", JOptionPane.INFORMATION_MESSAGE);
             startNewGameMode();
         }
     }
@@ -277,9 +276,9 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
             VirtualPet pet = gameManager.getCurrentPet();
             if (pet != null) {
                 SwingUtilities.invokeLater(() -> {
-                    pet.adjustStat("hunger", -4);
-                    pet.adjustStat("happiness", -3);
-                    pet.adjustStat("energy", -5);
+                    pet.updateStat("hunger", -4);
+                    pet.updateStat("happiness", -3);
+                    pet.updateStat("energy", -5);
                     gameManager.saveCurrentPet();
 
                     if (pet.getHealth() <= 0) {

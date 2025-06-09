@@ -16,25 +16,25 @@ public class Turtle extends VirtualPet {
     @Override
     public void play() {
         System.out.println(getName() + " competes in the daily race!!");
-        updateHappiness(30);
-        updateEnergy(-25);
-        updateHunger(-15);
+        updateStat("happiness", 30);
+        updateStat("energy", -25);
+        updateStat("hunger", -15);
         increaseHealth(10);
     }
     
     @Override
     public void eat() {
         System.out.println(getName() + " gnaws away at some fresh lettuce.");
-        updateHunger(15);
-        updateEnergy(5);
+        updateStat("energy", 5);
+        updateStat("hunger", 15);
         increaseHealth(15);
     }
     
     @Override
     public void sleep() {
         System.out.println(getName() + " rests in their shaded nest of leaves. zzzzzz");
-        updateEnergy(30);
-        updateHunger(-10);
+        updateStat("energy", 30);
+        updateStat("hunger", -10);
         increaseHealth(10);
     }
     
@@ -46,8 +46,8 @@ public class Turtle extends VirtualPet {
     @Override
     public void clean() {
         System.out.println(getName() + " rubs against a hard rock to shed skin.");
-        updateHappiness(10);
-        updateEnergy(-10);
+        updateStat("happiness", 10);
+        updateStat("energy", -10);
         increaseHealth(15);
     }
     

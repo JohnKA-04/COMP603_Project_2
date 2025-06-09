@@ -16,25 +16,25 @@ public class Hamster extends VirtualPet {
     @Override
     public void play() {
         System.out.println(getName() + " goes for a run in their hamster ball.");
-        updateHappiness(30);
-        updateEnergy(-20);
-        updateHunger(-15);
+        updateStat("happiness", 30);
+        updateStat("energy", -20);
+        updateStat("hunger", -15);
         increaseHealth(5);
     }
     
     @Override
     public void eat() {
         System.out.println(getName() + " nibbles on some hamster pellets.");
-        updateHunger(20);
-        updateEnergy(10);
+        updateStat("energy", 10);
+        updateStat("hunger", 20);
         increaseHealth(15);
     }
     
     @Override
     public void sleep() {
         System.out.println(getName() + " huddles beneath some straw to doze off. zz");
-        updateEnergy(35);
-        updateHunger(-10);
+        updateStat("energy", 35);
+        updateStat("hunger", 10);
         increaseHealth(10);
     }
     
@@ -46,8 +46,8 @@ public class Hamster extends VirtualPet {
     @Override
     public void clean() {
         System.out.println(getName() + " licks their belly fur.");
-        updateHappiness(15);
-        updateEnergy(-3);
+        updateStat("happiness", 15);
+        updateStat("energy", -3);
         increaseHealth(5);
     }
     

@@ -14,25 +14,25 @@ public class Dog extends VirtualPet {
     @Override
     public void play() {
         System.out.println(getName() + " fetches the frisbee!");
-        adjustStat("happiness", 25);
-        adjustStat("energy", -15);
-        adjustStat("hunger", -10);
+        updateStat("happiness", 25);
+        updateStat("energy", -15);
+        updateStat("hunger", -10);
         increaseHealth(5);
     }
 
     @Override
     public void eat() {
         System.out.println(getName() + " crunches on some kibble.");
-        adjustStat("hunger", 35);
-        adjustStat("energy", 5);
+        updateStat("hunger", 35);
+        updateStat("energy", 5);
         increaseHealth(10);
     }
 
     @Override
     public void sleep() {
         System.out.println(getName() + " snores peacefully.");
-        adjustStat("energy", 45);
-        adjustStat("hunger", -5);
+        updateStat("energy", 45);
+        updateStat("hunger", -5);
         increaseHealth(5);
     }
 
@@ -44,7 +44,7 @@ public class Dog extends VirtualPet {
     @Override
     public void clean() {
         System.out.println(getName() + " gets a good brush down.");
-        adjustStat("happiness", 10);
+        updateStat("happiness", 10);
         increaseHealth(3);
     }
 }
