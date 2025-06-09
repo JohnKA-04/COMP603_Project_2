@@ -15,10 +15,10 @@ import java.util.Map;
 class GameManager {
     private VirtualPet currentPet;
     private Map<String, VirtualPet> loadedPets = new HashMap<>();
-    private PetAccesData petDAO;
+    private PetAccesData petAD;
 
-    public GameManager(PetAccesData petDAO) {
-        this.petDAO = petDAO;
+    public GameManager(PetAccesData petAD) {
+        this.petAD = petAD;
     }
     public VirtualPet getCurrentPet() { return currentPet; }
 
@@ -32,18 +32,18 @@ class GameManager {
 
     public void saveCurrentPet() {
         if (currentPet != null) {
-            petDAO.savePet(currentPet);
+            petAD.savePet(currentPet);
         }
     }
     public VirtualPet loadPet(String name) {
-        VirtualPet pet = petDAO.loadPet(name);
+        VirtualPet pet = petAD.loadPet(name);
         if (pet != null) {
             setCurrentPet(pet);
         }
         return pet;
     }
     public List<VirtualPet> loadAllPets() {
-        List<VirtualPet> allPets = petDAO.loadAllPets();
+        List<VirtualPet> allPets = petAD.loadAllPets();
         loadedPets.clear();
         for (VirtualPet pet : allPets) {
             loadedPets.put(pet.getName(), pet);
@@ -54,6 +54,6 @@ class GameManager {
     public void addNewPet(VirtualPet pet) {
         loadedPets.put(pet.getName(), pet);
         setCurrentPet(pet);
-        petDAO.savePet(pet);
+        petAD.savePet(pet);
     }
 }
