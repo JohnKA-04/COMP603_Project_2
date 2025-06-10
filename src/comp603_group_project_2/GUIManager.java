@@ -244,7 +244,7 @@ public class GUIManager extends JFrame {
                 statsTextArea.append("\n" + gameManager.getCurrentPet().getName() + " could use some care.");
             }
         } else {
-            statsTextArea.setText("No pet selected. Create a new pet to start playing!");
+            statsTextArea.setText("No pet selected. Create a new pet to start playing");
         }
     }
 
@@ -269,7 +269,7 @@ public class GUIManager extends JFrame {
 
     private void handlePetDeath(VirtualPet deadPet) {
         statsDecreaser.shutdownNow();
-        JOptionPane.showMessageDialog(this, deadPet.getName() + " has passed away. Game Over!", "Oh no!", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, deadPet.getName() + " has passed away. Game Over!", "Oh no :(/", JOptionPane.ERROR_MESSAGE);
         gameManager.saveCurrentPet();
         PetDB_Manager.closeConnection();
         System.exit(0);
