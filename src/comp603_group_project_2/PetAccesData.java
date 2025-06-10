@@ -33,7 +33,7 @@ class PetAccesData {
             pstmt.setInt(4, pet.getHealth());
             pstmt.setString(5, pet.getName());
             int rowsUpdated = pstmt.executeUpdate();
-            if (rowsUpdated == 0) {
+            if (rowsUpdated == 0) {//pet not found, insert new pet
                 try (PreparedStatement insertPstmt = conn.prepareStatement(insertSql)) {
                     insertPstmt.setString(1, pet.getName());
                     insertPstmt.setString(2, pet.getClass().getSimpleName());
@@ -51,7 +51,6 @@ class PetAccesData {
             System.out.println("Error");
         }
     }
-
     public VirtualPet loadPet(String name) {
         if (conn == null) {
             System.err.println("No DB connection for loading pet: " + name);
