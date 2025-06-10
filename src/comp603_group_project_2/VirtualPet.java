@@ -90,11 +90,11 @@ abstract class VirtualPet {
         updateStat("health", amount);
     }
 
-    public abstract void play();
-    public abstract void eat();
-    public abstract void sleep();
-    public abstract void makeNoise();
-    public abstract void clean();
+    public abstract String play();
+    public abstract String eat();
+    public abstract String sleep();
+    public abstract String makeNoise();
+    public abstract String clean();
 
     @Override
     public String toString() {
