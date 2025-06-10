@@ -17,13 +17,13 @@ import javax.swing.JOptionPane;
  * @author johnk
  */
 public class PetDB_Manager {
-    private static final String JDBC_URL = "jdbc:derby://localhost:1527/Pet_DataBase";
+    private static final String JDBC_URL = "jdbc:derby:Pet_DataBase;create=true";
     private static final String USER = "Group_2";
     private static final String PASSWORD = "JohnJacee";
     private static Connection conn = null;
 
     public static Connection getConnection() {
-        if (conn == null) {
+        if (conn == null) {//we check if no connection, so we can connect to one
             try {
                 conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
                 System.out.println("Connected to DB at " + JDBC_URL);
@@ -38,21 +38,20 @@ public class PetDB_Manager {
     public static void closeConnection() {
         if (conn != null) {
             try {
-                if (JDBC_URL.contains("embedded")) {
-                    DriverManager.getConnection("jdbc:derby:;shutdown=true");
-                    System.out.println("Derby DB shut down normally.");
-                }
-            } catch (SQLException se) {
+                DriverManager.getConnection("jdbc:derby:;shutdown=true");
+                System.out.println("Derby DB shut down normally.");
+                
+            } catch (SQLException se) { //any errors during shutting down this will print error
                 System.out.println("Error");
-            } finally {
+            } finally { //this will always run and try close any connection
                 try {
                     if (conn != null) {
-                        conn.close();
-                        conn = null;
+                        conn.close(); //closes connection
+                        conn = null;//we set null as it will prevent it from being used again
                         System.out.println("DB connection closed.");
                     }
                 } catch (SQLException e) {
-                    System.err.println("Failed to completely close Database");
+                    System.err.println("Error closing Database");
                 }
             }
         }
@@ -60,8 +59,8 @@ public class PetDB_Manager {
 
     private static void createPetTable() {
         try (Statement stmt = conn.createStatement()) {
-            DatabaseMetaData dbmd = conn.getMetaData();
-            ResultSet tables = dbmd.getTables(null, null, "PETS", new String[]{"TABLE"});
+            DatabaseMetaData metadta = conn.getMetaData();
+            ResultSet tables = metadta.getTables(null, null, "PETS", new String[]{"TABLE"});//we check for pets table to avoid creating duplicate tables
             if (!tables.next()) {
                 String sql = "CREATE TABLE PETS (" +
                         "NAME VARCHAR(255) PRIMARY KEY, " +
@@ -73,7 +72,7 @@ public class PetDB_Manager {
                 stmt.executeUpdate(sql);
                 System.out.println("Created PETS table.");
             } else {
-                System.out.println("PETS table exists.");
+                System.out.println("PETS table exists");
             }
         } catch (SQLException e) {
             System.err.println("Error creating table: " + e.getMessage());

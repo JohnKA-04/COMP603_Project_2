@@ -23,23 +23,15 @@ import java.util.concurrent.TimeUnit;
 /**
  * Graphical User Interface for the Virtual Pet game.
  */
-public class GUIManager extends JFrame { // petGUI -> GUIManager
+public class GUIManager extends JFrame { 
     private JTextArea statsTextArea; // box displaying stats
-        // statsDisplay -> statsTextArea
     private JComboBox<String> selectPet; // drop-down menu to choose an existing pet created previously
-        // petSelector -> selectPet
     private JTextField newPetName;
-        // newPetNameField -> newPetName
     private JComboBox<String> newPetType;
-        // newPetTypeCombo -> newPetType
     private JButton createNewPetBtn; // button to create new pet after choosing name and type
-        // createPetButton -> createNewPetBtn
     private JPanel actionBtnsPanel; // box holding all action buttons (organizes on screen) 
-        // actionButtonsPanel -> actionBtnsPanel
-    
     private GameManager gameManager; // stores pets, tracks current pet, handles saving/loading data
     private ScheduledExecutorService statsDecreaser; // decreases pet stats over time 
-    // statsScheduler -> statsDecreaser
     
     public GUIManager(GameManager manager) {
         this.gameManager = manager;
@@ -65,26 +57,23 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
         actionBtnsPanel = new JPanel(new GridLayout(2, 3, 10, 10));
         String[] buttonLabels = {"Eat", "Play", "Sleep", "Clean", "Make Noise", "Save & Exit"};
         Map<String, ActionListener> actions = new HashMap<>();
-        actions.put("Eat", e -> performPetAction(p -> p.eat(), "nom nom!")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
+        actions.put("Eat", e -> performPetAction(p -> p.eat(), "nom nom nom!")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
         actions.put("Play", e -> performPetAction(p -> p.play(), "yay fun!")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
         actions.put("Sleep", e -> performPetAction(p -> p.sleep(), "zzzzzz...")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
         actions.put("Clean", e -> performPetAction(p -> p.clean(), "sparkling!")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
-        actions.put("Make Noise", e -> performPetAction(p -> p.makeNoise(), "a sound was made!")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
+        actions.put("Make Noise", e -> performPetAction(p -> p.makeNoise(), "woooooooooooo")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
         actions.put("Save & Exit", e -> handleExit());
-
-        for (String label : buttonLabels) {
+        for (String label : buttonLabels) {//using for loop to create and add the buttons
             JButton btn = new JButton(label);
             styleButton(btn);
             btn.addActionListener(actions.get(label));
             actionBtnsPanel.add(btn);
         }
-        
+   
         add(actionBtnsPanel, BorderLayout.CENTER);
-
-        JPanel bottomPanel = new JPanel(new BorderLayout(5, 5));
-        bottomPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        JPanel createPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 5));
+        JPanel bottomPanel = new JPanel(new BorderLayout(5, 5));//bottom panel
+        bottomPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));//10 pixle spaces on each side
+        JPanel createPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 5));//the panel where you create a new pet
         newPetName = new JTextField(12);
         newPetType = new JComboBox<>(new String[]{"Dog", "Cat", "Hamster", "Turtle"});
         createNewPetBtn = new JButton("Create Pet");
@@ -102,40 +91,38 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
         selectPanel.add(new JLabel("Or choose existing:"));
         selectPanel.add(selectPet);
 
-        bottomPanel.add(createPanel, BorderLayout.NORTH);
-        bottomPanel.add(selectPanel, BorderLayout.SOUTH);
-        add(bottomPanel, BorderLayout.SOUTH);
+        bottomPanel.add(createPanel, BorderLayout.NORTH);//adding the createPanel to north of bottom panel
+        bottomPanel.add(selectPanel, BorderLayout.SOUTH);//adding the selectPanel to south of bottom panel
+        add(bottomPanel, BorderLayout.SOUTH);//adding the bottompanel to south of the main window
 
-        addWindowListener(new java.awt.event.WindowAdapter() {
+        addWindowListener(new java.awt.event.WindowAdapter() {//adding listener so user can close window allowing handleexit to handle it
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 handleExit();
             }
         });
-
         setVisible(true);
         updateActionBtns(false);
     }
 
-    private void styleButton(JButton btn) {
+    private void styleButton(JButton btn) {//styling button, assisted by chatgpt
         btn.setFont(new Font("Arial", Font.BOLD, 13));
-        btn.setBackground(new Color(90, 160, 230));
+        btn.setBackground(new Color(90, 160, 230));//uses R(90),G(160) B(230), RGB. Gives it a blue shade 
         btn.setForeground(Color.WHITE);
         btn.setFocusPainted(false);
         btn.setBorder(BorderFactory.createRaisedBevelBorder());
-        btn.addChangeListener(new ChangeListener() {
+        btn.addChangeListener(new ChangeListener() {//when a mouse hovers over button it changes the colour of the button
             @Override
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = btn.getModel();
-                if (model.isRollover()) {
-                    btn.setBackground(new Color(60, 130, 200));
-                } else {
+                if (model.isRollover()) {//if the mouse is over button it changes it to a dark blue
+                    btn.setBackground(new Color(60, 130, 200));//uses RGB
+                } else {//stays the same colour
                     btn.setBackground(new Color(90, 160, 230));
                 }
             }
         });
     }
-
     private void updateActionBtns(boolean enable) {
         for (Component comp : actionBtnsPanel.getComponents()) {
             if (comp instanceof JButton) {
@@ -144,18 +131,15 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
         }
         ((JButton) actionBtnsPanel.getComponent(5)).setEnabled(true);
     }
-
     private void promptForPet() {
         List<VirtualPet> pets = gameManager.loadAllPets();
         if (!pets.isEmpty()) {
-            selectPet.removeAllItems();
+            selectPet.removeAllItems();//we remove the lsit from the dropdown menu so we dont get any duplicate names come up and then loop through the saved epet to add on the dropdown menu.
             for (VirtualPet p : pets) {
                 selectPet.addItem(p.getName());
             }
-
             int choice = JOptionPane.showConfirmDialog(this,
-                    "Saved pets found. Load an existing pet?", "Load Game?",
-                    JOptionPane.YES_NO_OPTION);
+                    "Saved pets is found, Load an existing pet?", "Load Game?",JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 if (selectPet.getItemCount() > 0) {
                     selectPet.setSelectedIndex(0);
@@ -167,21 +151,19 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
             startNewGameMode();
         }
     }
-
-    private void startNewGameMode() {
-        updateActionBtns(false);
-        selectPet.setEnabled(false);
-        newPetName.setEnabled(true);
+    private void startNewGameMode() {//this is the gui for a new game so user can create new pet
+        updateActionBtns(false);//keep to false so user can use the buttons yet until they make a pet
+        selectPet.setEnabled(false);//false so user can make new pet
+        newPetName.setEnabled(true);//true to let user type name
         newPetType.setEnabled(true);
         createNewPetBtn.setEnabled(true);
-        statsTextArea.setText("Enter a name and choose an animal type to create your new pet!");
+        statsTextArea.setText("Enter a name for your pet and choose an animal type!");
     }
-
-    private void selectExistingPet() {
-        String selectedName = (String) selectPet.getSelectedItem();
-        if (selectedName != null && gameManager.getLoadedPets().containsKey(selectedName)) {
+    private void selectExistingPet() {//choosing pet from dropdown menu
+        String selectedName = (String) selectPet.getSelectedItem();//getting name of chosen pet
+        if (selectedName != null && gameManager.getLoadedPets().containsKey(selectedName)) {//checking if name mataches a
             gameManager.setCurrentPet(gameManager.getLoadedPets().get(selectedName));
-            refreshDisplay();
+            refreshDisplay();//this refreshed the info on the GUI
             updateActionBtns(true);
             newPetName.setText("");
             newPetName.setEnabled(false);
@@ -192,23 +174,20 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
             statsTextArea.setText("Select a pet or create a new one.");
         }
     }
-
     private void createNewPet() {
         String petName = newPetName.getText().trim();
         String petType = (String) newPetType.getSelectedItem();
 
-        if (petName.isEmpty()) {
+        if (petName.isEmpty()) {//making sure that your pet has a name
             JOptionPane.showMessageDialog(this, "Please give your pet a name!", "Hey!", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if (gameManager.getLoadedPets().containsKey(petName)) {
-            JOptionPane.showMessageDialog(this, "A pet with that name already exists. Try another name or select it from the list.", "Oops!", JOptionPane.WARNING_MESSAGE);
+        if (gameManager.getLoadedPets().containsKey(petName)) {//making sure that your pet's name is unique from the saved pets
+            JOptionPane.showMessageDialog(this, "A pet with the same name already exists. Try another name", "Oops!", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
         VirtualPet newPet;
-
-        switch(petType) {
+        switch(petType) {//creates a pet object based on what petType the user chooses
             case "Dog":
                 newPet = new Dog(petName);
                 break;
@@ -222,11 +201,9 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
                 newPet = new Turtle(petName);
                 break;
             default:
-                JOptionPane.showMessageDialog(this, "Invalid pet type selected!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Invalid pet type", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
         }
-
-        
         gameManager.addNewPet(newPet);
         refreshSelectPet();
         selectPet.setSelectedItem(petName);
@@ -276,7 +253,7 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
             VirtualPet pet = gameManager.getCurrentPet();
             if (pet != null) {
                 SwingUtilities.invokeLater(() -> {
-                    pet.updateStat("hunger", -4);
+                    pet.updateStat("hunger", -5);
                     pet.updateStat("happiness", -3);
                     pet.updateStat("energy", -5);
                     gameManager.saveCurrentPet();
@@ -298,18 +275,17 @@ public class GUIManager extends JFrame { // petGUI -> GUIManager
         System.exit(0);
     }
 
-    private void handleExit() {
+    private void handleExit() {//chatgpt assisted
         int choice = JOptionPane.showConfirmDialog(this,
-                "Save game before exiting?", "Exit Game?",
-                JOptionPane.YES_NO_CANCEL_OPTION);
+                "Save game before exiting?", "Exit Game?", JOptionPane.YES_NO_CANCEL_OPTION);
         if (choice == JOptionPane.YES_OPTION) {
             gameManager.saveCurrentPet();
-            JOptionPane.showMessageDialog(this, "Game saved. Goodbye!", "Saved", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Game saved. Cya!", "Saved", JOptionPane.INFORMATION_MESSAGE);
             statsDecreaser.shutdown();
             PetDB_Manager.closeConnection();
             System.exit(0);
         } else if (choice == JOptionPane.NO_OPTION) {
-            JOptionPane.showMessageDialog(this, "Exiting without saving.", "Goodbye!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Exiting without saving.", "BYEBYE!", JOptionPane.INFORMATION_MESSAGE);
             statsDecreaser.shutdown();
             PetDB_Manager.closeConnection();
             System.exit(0);
