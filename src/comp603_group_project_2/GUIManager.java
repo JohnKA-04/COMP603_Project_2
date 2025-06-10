@@ -57,11 +57,11 @@ public class GUIManager extends JFrame {
         actionBtnsPanel = new JPanel(new GridLayout(2, 3, 10, 10));
         String[] buttonLabels = {"Eat", "Play", "Sleep", "Clean", "Make Noise", "Save & Exit"};
         Map<String, ActionListener> actions = new HashMap<>();
-        actions.put("Eat", e -> performPetAction(p -> p.eat(), "nom nom nom!")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
-        actions.put("Play", e -> performPetAction(p -> p.play(), "yay fun!")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
-        actions.put("Sleep", e -> performPetAction(p -> p.sleep(), "zzzzzz...")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
-        actions.put("Clean", e -> performPetAction(p -> p.clean(), "sparkling!")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
-        actions.put("Make Noise", e -> performPetAction(p -> p.makeNoise(), "woooooooooooo")); //chatgpt assisted, this allow captions to print on panel when eat is initiated
+        actions.put("Eat", e -> performPetAction(p -> p.eat(), "nom nom nom!")); //chatgpt assisted, this allow captions to print on panel when eat button is pressed
+        actions.put("Play", e -> performPetAction(p -> p.play(), "yay fun!")); //chatgpt assisted, this allow captions to print on panel when play button is pressed
+        actions.put("Sleep", e -> performPetAction(p -> p.sleep(), "zzzzzz...")); //chatgpt assisted, this allow captions to print on panel when sleep button is pressed
+        actions.put("Clean", e -> performPetAction(p -> p.clean(), "bubbly!")); //chatgpt assisted, this allow captions to print on panel when clean button is pressed
+        actions.put("Make Noise", e -> performPetAction(p -> p.makeNoise(), "woooooooooooo")); //chatgpt assisted, this allow captions to print on panel when makeNoise button is pressed
         actions.put("Save & Exit", e -> handleExit());
         for (String label : buttonLabels) {//using for loop to create and add the buttons
             JButton btn = new JButton(label);
