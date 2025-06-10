@@ -237,18 +237,18 @@ public class GUIManager extends JFrame {
 
     private void refreshDisplay() {
         if (gameManager.getCurrentPet() != null) {
-            statsTextArea.setText(gameManager.getCurrentPet().toString());
+            statsTextArea.setText(gameManager.getCurrentPet().toString());//shows the pet stats on the text area
             if (gameManager.getCurrentPet().getHealth() < 30) {
-                statsTextArea.append("\n" + gameManager.getCurrentPet().getName() + " is looking unwell...");
+                statsTextArea.append("\n" + gameManager.getCurrentPet().getName() + " is looking unwell...");//shows this when health is below 30
             } else if (gameManager.getCurrentPet().getHealth() < 60) {
-                statsTextArea.append("\n" + gameManager.getCurrentPet().getName() + " could use some care.");
+                statsTextArea.append("\n" + gameManager.getCurrentPet().getName() + " could use some care.");//shows this when health is below 60 but above 30
             }
         } else {
             statsTextArea.setText("No pet selected. Create a new pet to start playing");
         }
     }
 
-    private void startStatDecay() {
+    private void startStatDecay() {//chatgpt assisted
         statsDecreaser.scheduleAtFixedRate(() -> {
             VirtualPet pet = gameManager.getCurrentPet();
             if (pet != null) {
@@ -256,18 +256,18 @@ public class GUIManager extends JFrame {
                     pet.updateStat("hunger", -5);
                     pet.updateStat("happiness", -3);
                     pet.updateStat("energy", -5);
-                    gameManager.saveCurrentPet();
+                    gameManager.saveCurrentPet();//saves the updated stats to the database
 
                     if (pet.getHealth() <= 0) {
-                        handlePetDeath(pet);
+                        handlePetDeath(pet);//pet dies if health is below 0
                     }
                     refreshDisplay();
                 });
             }
-        }, 30, 30, TimeUnit.SECONDS);
+        }, 30, 30, TimeUnit.SECONDS);//stat decay starts after 30 seconds and repeats every 30s
     }
 
-    private void handlePetDeath(VirtualPet deadPet) {
+    private void handlePetDeath(VirtualPet deadPet) {//this is called when pet dies, it stops the game, decay and will update database
         statsDecreaser.shutdownNow();
         JOptionPane.showMessageDialog(this, deadPet.getName() + " has passed away. Game Over!", "Oh no :(/", JOptionPane.ERROR_MESSAGE);
         gameManager.saveCurrentPet();
