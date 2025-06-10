@@ -24,13 +24,13 @@ import java.util.concurrent.TimeUnit;
  * Graphical User Interface for the Virtual Pet game.
  */
 public class GUIManager extends JFrame { 
-    private JTextArea statsTextArea; // box displaying stats
-    private JComboBox<String> selectPet; // drop-down menu to choose an existing pet created previously
+    private JTextArea statsTextArea;//box displaying stats
+    private JComboBox<String> selectPet;//drop-down menu to choose an existing pet created previously
     private JTextField newPetName;
     private JComboBox<String> newPetType;
-    private JButton createNewPetBtn; // button to create new pet after choosing name and type
-    private JPanel actionBtnsPanel; // box holding all action buttons (organizes on screen) 
-    private GameManager gameManager; // stores pets, tracks current pet, handles saving/loading data
+    private JButton createNewPetBtn;//button to create new pet after choosing name and type
+    private JPanel actionBtnsPanel;//box holding all action buttons (organizes on screen) 
+    private GameManager gameManager;//stores pets, tracks current pet, handles saving/loading data
     private ScheduledExecutorService statsDecreaser; // decreases pet stats over time 
     
     public GUIManager(GameManager manager) {

@@ -14,41 +14,43 @@ public class Hamster extends VirtualPet {
     }
     
     @Override
-    public void play() {
-        System.out.println(getName() + " goes for a run in their hamster ball.");
+    public String play() {
         updateStat("happiness", 30);
         updateStat("energy", -20);
         updateStat("hunger", -15);
         increaseHealth(5);
+        return getName() + " goes for a run in their hamster ball.";
     }
     
     @Override
-    public void eat() {
-        System.out.println(getName() + " nibbles on some hamster pellets.");
+    public String eat() {
         updateStat("energy", 10);
         updateStat("hunger", 20);
         increaseHealth(15);
+        return getName() + " nibbles on some hamster pellets.";
+        
     }
     
     @Override
-    public void sleep() {
-        System.out.println(getName() + " huddles beneath some straw to doze off. zz");
+    public String sleep() {
         updateStat("energy", 35);
         updateStat("hunger", 10);
         increaseHealth(10);
+        return " huddles beneath some straw to doze off. zz";
     }
     
     @Override
-    public void makeNoise() {
-        System.out.println("squeak squeak..");
+    public String makeNoise() {
+        return "squeak squeak..";
     }    
     
     @Override
-    public void clean() {
-        System.out.println(getName() + " licks their belly fur.");
+    public String clean() {
         updateStat("happiness", 15);
         updateStat("energy", -3);
         increaseHealth(5);
+        return " licks their belly fur.";
+        
     }
     
 }
