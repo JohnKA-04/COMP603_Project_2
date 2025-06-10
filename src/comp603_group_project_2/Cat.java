@@ -13,7 +13,7 @@ class Cat extends VirtualPet {
 
     @Override
     public void play() {
-        System.out.println(getName() + " bats at a dangling toy.");
+        System.out.println(getName() + " claws at a dangling toy.");
         updateStat("happiness", 30);
         updateStat("energy", -20);
         updateStat("hunger", -8);

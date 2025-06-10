@@ -22,13 +22,14 @@ class GameManager {
     }
     public VirtualPet getCurrentPet() { return currentPet; }
 
-    public void setCurrentPet(VirtualPet pet) {
+    public void setCurrentPet(VirtualPet pet) {//using loadpet map to store the chosen pet
         this.currentPet = pet;
         if (pet != null) {
             loadedPets.put(pet.getName(), pet);
         }
     }
-    public Map<String, VirtualPet> getLoadedPets() { return loadedPets; }
+    public Map<String, VirtualPet> getLoadedPets() { 
+        return loadedPets; }
 
     public void saveCurrentPet() {
         if (currentPet != null) {
@@ -50,8 +51,7 @@ class GameManager {
         }
         return allPets;
     }
-
-    public void addNewPet(VirtualPet pet) {
+    public void addNewPet(VirtualPet pet){//adding new pets to game and database
         loadedPets.put(pet.getName(), pet);
         setCurrentPet(pet);
         petAD.savePet(pet);

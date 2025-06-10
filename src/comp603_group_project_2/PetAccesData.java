@@ -24,8 +24,8 @@ class PetAccesData {
     }
 
     public void savePet(VirtualPet pet) {
-        String updateSql = "UPDATE PETS SET HUNGER = ?, HAPPINESS = ?, ENERGY = ?, HEALTH = ? WHERE NAME = ?";
-        String insertSql = "INSERT INTO PETS (NAME, TYPE, HUNGER, HAPPINESS, ENERGY, HEALTH) VALUES (?, ?, ?, ?, ?, ?)";
+        String updateSql = "UPDATE PETS SET HUNGER = ?, HAPPINESS = ?, ENERGY = ?, HEALTH = ? WHERE NAME = ?";//for updating existing pet
+        String insertSql = "INSERT INTO PETS (NAME, TYPE, HUNGER, HAPPINESS, ENERGY, HEALTH) VALUES (?, ?, ?, ?, ?, ?)";//inserting new pet
         try (PreparedStatement pstmt = conn.prepareStatement(updateSql)) {
             pstmt.setInt(1, pet.getHunger());
             pstmt.setInt(2, pet.getHappiness());
