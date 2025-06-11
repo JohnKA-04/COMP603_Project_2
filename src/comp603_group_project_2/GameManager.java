@@ -20,8 +20,7 @@ class GameManager {
     public GameManager(PetAccesData petAD) {
         this.petAD = petAD;
     }
-    public VirtualPet getCurrentPet() { 
-        return currentPet; }
+    public VirtualPet getCurrentPet() { return currentPet; }
 
     public void setCurrentPet(VirtualPet pet) {//using loadpet map to store the chosen pet
         this.currentPet = pet;

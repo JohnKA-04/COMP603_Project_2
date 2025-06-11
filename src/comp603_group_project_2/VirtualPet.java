@@ -10,8 +10,10 @@ package comp603_group_project_2;
  */
 abstract class VirtualPet {
     private String petName;
-    protected int hunger, happiness, energy, health;
-
+    protected int hunger;
+    protected int happiness;
+    protected int energy;
+    protected int health;
     public VirtualPet(String petName) {//the initial stat values
         this.petName = petName;
         this.hunger = 50;
@@ -89,7 +91,6 @@ abstract class VirtualPet {
     protected void increaseHealth(int amount) {
         updateStat("health", amount);
     }
-
     public abstract String play();
     public abstract String eat();
     public abstract String sleep();
