@@ -41,7 +41,7 @@ public class Hamster extends VirtualPet {
     
     @Override
     public String makeNoise() {
-        return "squeak squeak..";
+        return getName() + " says: squeak squeak..";
     }    
     
     @Override
@@ -49,7 +49,7 @@ public class Hamster extends VirtualPet {
         updateStat("happiness", 15);
         updateStat("energy", -3);
         increaseHealth(5);
-        return " licks their belly fur.";
+        return getName() + " licks their belly fur.";
         
     }
     
