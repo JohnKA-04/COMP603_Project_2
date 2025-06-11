@@ -13,38 +13,38 @@ class Cat extends VirtualPet {
 
     @Override
     public void play() {
-        System.out.println(getName() + " claws at a dangling toy.");
         updateStat("happiness", 30);
         updateStat("energy", -20);
         updateStat("hunger", -8);
         increaseHealth(5);
+        return getName() + " claws at a dangling toy.";
     }
 
     @Override
     public void eat() {
-        System.out.println(getName() + " delicately eats its fishy treat.");
         updateStat("hunger", 30);
         updateStat("energy", 3);
         increaseHealth(10);
+        return getName() + " delicately eats its fishy treat.";
     }
 
     @Override
     public void sleep() {
-        System.out.println(getName() + " naps in a sunbeam.");
         updateStat("energy", 35);
         updateStat("hunger", -5);
         increaseHealth(5);
+        return getName() + " naps in a sunbeam.";
     }
 
     @Override
     public void makeNoise() {
-        System.out.println("Meow! A soft purr.");
+        return getName() + " says: Meow! A soft purr.";
     }
 
     @Override
     public void clean() {
-        System.out.println(getName() + " meticulously grooms itself.");
         updateStat("happiness", 5);
         increaseHealth(2);
+        return getName() + " meticulously grooms itself.";
     }
 }

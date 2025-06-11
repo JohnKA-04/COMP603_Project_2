@@ -13,38 +13,38 @@ public class Dog extends VirtualPet {
 
     @Override
     public void play() {
-        System.out.println(getName() + " fetches the frisbee!");
         updateStat("happiness", 25);
         updateStat("energy", -15);
         updateStat("hunger", -10);
         increaseHealth(5);
+        return getName() + " fetches the frisbee!";
     }
 
     @Override
     public void eat() {
-        System.out.println(getName() + " crunches on some kibble.");
         updateStat("hunger", 35);
         updateStat("energy", 5);
         increaseHealth(10);
+        return getName() + " crunches on some kibble.";
     }
 
     @Override
     public void sleep() {
-        System.out.println(getName() + " snores peacefully.");
         updateStat("energy", 45);
         updateStat("hunger", -5);
         increaseHealth(5);
+        return getName() + " snores peacefully"; 
     }
 
     @Override
     public void makeNoise() {
-        System.out.println("Woof woof! A happy bark!");
+        return getName() + " says: Woof woof! A happy bark!";
     }
 
     @Override
     public void clean() {
-        System.out.println(getName() + " gets a good brush down.");
         updateStat("happiness", 10);
         increaseHealth(3);
+        return getName() + " gets a good brush down.";
     }
 }
