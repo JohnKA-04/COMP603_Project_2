@@ -14,7 +14,7 @@ public class Turtle extends VirtualPet {
     }
     
     @Override
-    public void play() {
+    public String play() {
         updateStat("happiness", 30);
         updateStat("energy", -25);
         updateStat("hunger", -15);
@@ -23,7 +23,7 @@ public class Turtle extends VirtualPet {
     }
     
     @Override
-    public void eat() {
+    public String eat() {
         updateStat("energy", 5);
         updateStat("hunger", 15);
         increaseHealth(15);
@@ -31,7 +31,7 @@ public class Turtle extends VirtualPet {
     }
     
     @Override
-    public void sleep() {
+    public String sleep() {
         updateStat("energy", 30);
         updateStat("hunger", -10);
         increaseHealth(10);
@@ -39,12 +39,12 @@ public class Turtle extends VirtualPet {
     }
     
     @Override
-    public void makeNoise() {
+    public String makeNoise() {
         return getName() + " says: zooooooooommmmmmmm!!!";
     }
     
     @Override
-    public void clean() {
+    public String clean() {
         updateStat("happiness", 10);
         updateStat("energy", -10);
         increaseHealth(15);

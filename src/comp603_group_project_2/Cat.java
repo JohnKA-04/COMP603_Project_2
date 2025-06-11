@@ -12,7 +12,7 @@ class Cat extends VirtualPet {
     public Cat(String petName) { super(petName); }
 
     @Override
-    public void play() {
+    public String play() {
         updateStat("happiness", 30);
         updateStat("energy", -20);
         updateStat("hunger", -8);
@@ -21,7 +21,7 @@ class Cat extends VirtualPet {
     }
 
     @Override
-    public void eat() {
+    public String eat() {
         updateStat("hunger", 30);
         updateStat("energy", 3);
         increaseHealth(10);
@@ -29,7 +29,7 @@ class Cat extends VirtualPet {
     }
 
     @Override
-    public void sleep() {
+    public String sleep() {
         updateStat("energy", 35);
         updateStat("hunger", -5);
         increaseHealth(5);
@@ -37,12 +37,12 @@ class Cat extends VirtualPet {
     }
 
     @Override
-    public void makeNoise() {
+    public String makeNoise() {
         return getName() + " says: Meow! A soft purr.";
     }
 
     @Override
-    public void clean() {
+    public String clean() {
         updateStat("happiness", 5);
         increaseHealth(2);
         return getName() + " meticulously grooms itself.";

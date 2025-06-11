@@ -55,15 +55,17 @@ public class GUIManager extends JFrame {
         add(new JScrollPane(statsTextArea), BorderLayout.NORTH);
 
         actionBtnsPanel = new JPanel(new GridLayout(2, 3, 10, 10));
-        String[] buttonLabels = {"Eat", "Play", "Sleep", "Clean", "Make Noise", "Save & Exit"};
-        Map<String, ActionListener> actions = new HashMap<>();
-        actions.put("Eat", e -> performPetAction(p -> p.eat())); //chatgpt assisted, this allow captions to print on panel when eat button is pressed
-        actions.put("Play", e -> performPetAction(p -> p.play())); //chatgpt assisted, this allow captions to print on panel when play button is pressed
-        actions.put("Sleep", e -> performPetAction(p -> p.sleep())); //chatgpt assisted, this allow captions to print on panel when sleep button is pressed
-        actions.put("Clean", e -> performPetAction(p -> p.clean())); //chatgpt assisted, this allow captions to print on panel when clean button is pressed
-        actions.put("Make Noise", e -> performPetAction(p -> p.makeNoise())); //chatgpt assisted, this allow captions to print on panel when makeNoise button is pressed
-        actions.put("Save & Exit", e -> handleExit());
+        String[] buttons = {"Eat", "Play", "Sleep", "Clean", "Make Noise", "Save & Exit"};
         
+        Map<String, ActionListener> actions = new HashMap<>();
+        //Below we were assisted by chatgpt which uses the lambda expression. Without using the lambda expressions will make our code longer and too technical. 
+        actions.put("Eat", e -> performPetAction(p -> p.eat())); 
+        actions.put("Play", e -> performPetAction(p -> p.play()));
+        actions.put("Sleep", e -> performPetAction(p -> p.sleep()));
+        actions.put("Clean", e -> performPetAction(p -> p.clean()));
+        actions.put("Make Noise", e -> performPetAction(p -> p.makeNoise())); 
+        actions.put("Save & Exit", e -> handleExit());
+        //Chat gpt assisted above
         JButton eatBtn = new JButton("Eat");
         styleButton(eatBtn);//using the stylingbutton method to style the buttons
         eatBtn.addActionListener(actions.get("Eat")); //connecting to action listener for Eat
