@@ -57,18 +57,42 @@ public class GUIManager extends JFrame {
         actionBtnsPanel = new JPanel(new GridLayout(2, 3, 10, 10));
         String[] buttonLabels = {"Eat", "Play", "Sleep", "Clean", "Make Noise", "Save & Exit"};
         Map<String, ActionListener> actions = new HashMap<>();
-        actions.put("Eat", e -> performPetAction(p -> p.eat(), "nom nom nom!")); //chatgpt assisted, this allow captions to print on panel when eat button is pressed
-        actions.put("Play", e -> performPetAction(p -> p.play(), "yay fun!")); //chatgpt assisted, this allow captions to print on panel when play button is pressed
-        actions.put("Sleep", e -> performPetAction(p -> p.sleep(), "zzzzzz...")); //chatgpt assisted, this allow captions to print on panel when sleep button is pressed
-        actions.put("Clean", e -> performPetAction(p -> p.clean(), "bubbly!")); //chatgpt assisted, this allow captions to print on panel when clean button is pressed
-        actions.put("Make Noise", e -> performPetAction(p -> p.makeNoise(), "woooooooooooo")); //chatgpt assisted, this allow captions to print on panel when makeNoise button is pressed
+        actions.put("Eat", e -> performPetAction(p -> p.eat())); //chatgpt assisted, this allow captions to print on panel when eat button is pressed
+        actions.put("Play", e -> performPetAction(p -> p.play())); //chatgpt assisted, this allow captions to print on panel when play button is pressed
+        actions.put("Sleep", e -> performPetAction(p -> p.sleep())); //chatgpt assisted, this allow captions to print on panel when sleep button is pressed
+        actions.put("Clean", e -> performPetAction(p -> p.clean())); //chatgpt assisted, this allow captions to print on panel when clean button is pressed
+        actions.put("Make Noise", e -> performPetAction(p -> p.makeNoise())); //chatgpt assisted, this allow captions to print on panel when makeNoise button is pressed
         actions.put("Save & Exit", e -> handleExit());
-        for (String label : buttonLabels) {//using for loop to create and add the buttons
-            JButton btn = new JButton(label);
-            styleButton(btn);
-            btn.addActionListener(actions.get(label));
-            actionBtnsPanel.add(btn);
-        }
+        
+        JButton eatBtn = new JButton("Eat");
+        styleButton(eatBtn);//using the stylingbutton method to style the buttons
+        eatBtn.addActionListener(actions.get("Eat")); //connecting to action listener for Eat
+        actionBtnsPanel.add(eatBtn);
+
+        JButton playBtn = new JButton("Play");
+        styleButton(playBtn);
+        playBtn.addActionListener(actions.get("Play"));
+        actionBtnsPanel.add(playBtn);
+
+        JButton sleepBtn = new JButton("Sleep");
+        styleButton(sleepBtn);
+        sleepBtn.addActionListener(actions.get("Sleep"));
+        actionBtnsPanel.add(sleepBtn);
+
+        JButton cleanBtn = new JButton("Clean");
+        styleButton(cleanBtn);
+        cleanBtn.addActionListener(actions.get("Clean"));
+        actionBtnsPanel.add(cleanBtn);
+
+        JButton makeNoiseBtn = new JButton("Make Noise");
+        styleButton(makeNoiseBtn);
+        makeNoiseBtn.addActionListener(actions.get("Make Noise"));
+        actionBtnsPanel.add(makeNoiseBtn);
+
+        JButton saveExitBtn = new JButton("Save & Exit");
+        styleButton(saveExitBtn);
+        saveExitBtn.addActionListener(actions.get("Save & Exit"));
+        actionBtnsPanel.add(saveExitBtn);
    
         add(actionBtnsPanel, BorderLayout.CENTER);
         JPanel bottomPanel = new JPanel(new BorderLayout(5, 5));//bottom panel
@@ -223,13 +247,15 @@ public class GUIManager extends JFrame {
         }
     }
 
-    private void performPetAction(java.util.function.Consumer<VirtualPet> action, String message) {
+    private void performPetAction(java.util.function.Function<VirtualPet, String> actionF) {
         VirtualPet pet = gameManager.getCurrentPet();
         if (pet != null) {
-            action.accept(pet);
+            String petVoice = actionF.apply(pet);
             gameManager.saveCurrentPet();
             refreshDisplay();
-            statsTextArea.append("\n" + pet.getName() + " says: " + message);
+            if(petVoice !=null && !petVoice.isEmpty()){
+                statsTextArea.append("\n" + petVoice);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "No pet active! Create or load one.", "Error", JOptionPane.ERROR_MESSAGE);
         }
